@@ -4,8 +4,6 @@ from io import StringIO
 import numpy as np 
 import torch
 import matplotlib.pyplot as plt
-from IPython.display import clear_output
-from tqdm import tnrange
 from SimCIM import*
 from functions import*
 datatype = torch.float32
