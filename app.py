@@ -15,14 +15,14 @@ st.write("""
  App for finding routes by simulating the electro-optical machine
 """)
 
-st.write('''TSP problem is formulated as quadratic unconstrained binary optimization.
-	The information about lenghts between cities is encoded into matrix J and vector b.
-	The goal of the algorithm is to find binary vector which minimizes function H.''')
+st.write('''TSP problem is formulated as the quadratic unconstrained binary optimization.
+	The information about lenghts between cities is encoded into a matrix J and a vector b.
+	The goal of the algorithm is to find binary vector s which minimizes function H.''')
 
 st.latex(r'''H = -\frac{1}{2}\sum_{ij=1}^N J_{ij} s_i s_j - b_i s_i, \; s_i = \pm 1''')
 
 st.write('''The algorithm consists of the following differential equations on amplitudes $$c_i$$.
-	To obtain value of binary variables s from continuous amplitudes c, you need to take a sign of c.''')
+	To obtain valuea of binary variables s from continuous amplitudes c, you need to take a sign of c.''')
 
 st.latex(r'''
 	\begin{cases}
@@ -32,13 +32,13 @@ st.latex(r'''
 ''')
 
 st.write('''$$J_{max}$$ is a maximum number out of all elements of matrix J.
-	The time dependent pump function p(t) is parametrized as following.''')
+	The time dependent pump function p(t) is parametrized as following:''')
 
 st.latex(r'''p(t) = O \tanh \left[S(t/T - 0.5) + D\right]''')
 
 st.write('''The main challenge of the algorithm is to adjust hyperparameters (O, S, D)
 	for a particular problem. Here I propose to feel the taste of combinatorial optimization by 
-	finding the best of these parameters for solving TSP problem.''')
+	finding the best values of these parameters for solving TSP problem.''')
 
 st.sidebar.header("User input parameters")
 
