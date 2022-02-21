@@ -43,7 +43,7 @@ st.write('Here I propose to feel the taste of combinatorial optimization by prob
 url = 'https://doi.org/10.1364/OE.27.010288'
 st.markdown(url, unsafe_allow_html=True)
 st.write('''Perceive this app as a black box with three hyperparameters O,S,D.
-	Your goal is to adjust these parameters on order to find a solution of TSP problem, i. e. find the route passing
+	Your goal is to adjust these parameters in order to find a solution of TSP problem, i. e. find the route passing
 	through each city once and having the least distance.''')
 
 st.sidebar.header("User input parameters")
