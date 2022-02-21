@@ -16,8 +16,8 @@ st.write("""
 
 st.latex(r'''
 	\begin{cases}
-	a\\
-	b
+	\frac{c_i}{dt}  = p(t)c_i + \sum_i J_{ij} c_j + b_i\\
+	|c_i|\leq 1, \; i=1,...,N
 	\end{cases}
 ''')
 
