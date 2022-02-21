@@ -14,6 +14,13 @@ st.write("""
  App for finding routes by simulating the electro-optical machine
 """)
 
+st.latex(r'''
+	\begin{cases}
+	a\\
+	b
+	\end{cases}
+''')
+
 st.sidebar.header("User input parameters")
 
 def user_input_parameters():
