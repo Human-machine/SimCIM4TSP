@@ -18,10 +18,14 @@ st.latex(r'''H = -\frac{1}{2}\sum_{ij} J_{ij} s_i s_j - b_i s_i''')
 
 st.latex(r'''
 	\begin{cases}
-	\frac{d c_i}{dt}  = p(t)c_i + \sum_i J_{ij} c_j + b_i\\
+	\frac{d c_i}{dt}  = J_{max} p(t)c_i + \sum_i J_{ij} c_j + b_i\\
 	|c_i|\leq 1, \; i=1,...,N
 	\end{cases}
 ''')
+
+st.latex(r'''p(t) = O \tanh \left[S(t/T - 0.5) + D\right]''')
+
+
 
 st.sidebar.header("User input parameters")
 
