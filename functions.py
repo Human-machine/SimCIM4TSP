@@ -25,7 +25,7 @@ def plot_cities(ax,cities,order):
         ax.tick_params(labelsize=18)
         ax.grid()
     else:
-        ax.text(0.5, 0.5,'Решения не найдено',
+        ax.text(0.5, 0.5,'Solution is not found',
          horizontalalignment='center',
          verticalalignment='center',
          transform = ax.transAxes)
