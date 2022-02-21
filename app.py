@@ -9,12 +9,19 @@ from functions import*
 datatype = torch.float32
 device = 'cpu'
 
+
 st.write("""
 # SimCIM for TSP
  App for finding routes by simulating the electro-optical machine
 """)
 
-st.latex(r'''H = -\frac{1}{2}\sum_{ij} J_{ij} s_i s_j - b_i s_i''')
+st.write('''TSP problem is formulated as quadratic unconstrained binary optimization.
+	The information about lenghts between cities is encoded into matrix J and vector b.
+	The goal of the algorithm is to find binary vector which minimizes function H.''')
+
+st.latex(r'''H = -\frac{1}{2}\sum_{ij} J_{ij} s_i s_j - b_i s_i, \; s_i = \pm 1''')
+
+
 
 st.latex(r'''
 	\begin{cases}
