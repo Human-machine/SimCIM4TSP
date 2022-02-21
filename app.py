@@ -14,7 +14,7 @@ st.write("""
  App for finding routes by simulating the electro-optical machine
 """)
 
-st.latex(r'''H = -\frac{1}{2}\sum_{ij} J_ij s_i s_j - b_i s_i''')
+st.latex(r'''H = -\frac{1}{2}\sum_{ij} J_{ij} s_i s_j - b_i s_i''')
 
 st.latex(r'''
 	\begin{cases}
