@@ -21,7 +21,7 @@ st.write('''TSP problem is formulated as quadratic unconstrained binary optimiza
 
 st.latex(r'''H = -\frac{1}{2}\sum_{ij} J_{ij} s_i s_j - b_i s_i, \; s_i = \pm 1''')
 
-
+st.write('''The algorithm consists of the following differential equations on amplitudes $$c_i$$''')
 
 st.latex(r'''
 	\begin{cases}
