@@ -13,10 +13,10 @@ def plot_cities(cities,lengths,order):
     fig, ax = plt.subplots(figsize=(8,5))
     if order.shape[0]==N_cities:
         cities_rearranged = cities[order,:]
-        # for i in range(N_cities-1):
-        #     ax.plot(cities_rearranged[i:i+2,0],cities_rearranged[i:i+2,1],'-ro')
-        ax.plot([cities_rearranged[N_cities-1,0],cities_rearranged[0,0]],
-            [cities_rearranged[N_cities-1,1],cities_rearranged[0,1]],'-ro')
+        for i in range(N_cities-1):
+            ax.plot(cities_rearranged[i:i+2,0],cities_rearranged[i:i+2,1],'-ro')
+        # ax.plot([cities_rearranged[N_cities-1,0],cities_rearranged[0,0]],
+        #     [cities_rearranged[N_cities-1,1],cities_rearranged[0,1]],'-ro')
         ax.set_xlabel('x',fontsize=18)
         ax.set_ylabel('y',fontsize=18)
         ax.plot(np.zeros(5),'o',color='white',alpha=0.,label =
