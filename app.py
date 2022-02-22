@@ -15,30 +15,6 @@ st.write("""
  App for finding routes by simulating the electro-optical machine
 """)
 
-# st.write('''TSP problem is formulated as the quadratic unconstrained binary optimization.
-# 	The information about lenghts between cities is encoded into a matrix J and a vector b.
-# 	The goal of the algorithm is to find binary vector s which minimizes function H.''')
-
-# st.latex(r'''H = -\frac{1}{2}\sum_{ij=1}^N J_{ij} s_i s_j - b_i s_i, \; s_i = \pm 1''')
-
-# st.write('''The algorithm consists of the following differential equations on amplitudes $$c_i$$.
-# 	To obtain valuea of binary variables s from continuous amplitudes c, you need to take a sign of c.''')
-
-# st.latex(r'''
-# 	\begin{cases}
-# 	\frac{d c_i}{dt}  = J_{max} p(t)c_i + \sum_i J_{ij} c_j + b_i\\
-# 	|c_i|\leq 1, \; i=1,...,N
-# 	\end{cases}
-# ''')
-
-# st.write('''$$J_{max}$$ is a maximum number out of all elements of matrix J.
-# 	The time dependent pump function p(t) is parametrized as following:''')
-
-# st.latex(r'''p(t) = O \tanh \left[S(t/T - 0.5) + D\right]''')
-
-# st.write('''The main challenge of the algorithm is to adjust hyperparameters (O, S, D)
-# 	for a particular problem. Here I propose to feel the taste of combinatorial optimization by 
-# 	finding the best values of these parameters for solving TSP problem.''')
 st.write('Here I propose to feel the taste of combinatorial optimization by probing the algorithm called SimCIM.')
 url = 'https://doi.org/10.1364/OE.27.010288'
 st.markdown(url, unsafe_allow_html=True)
@@ -65,7 +41,7 @@ st.subheader("User input parameters")
 st.write(df)
 
 def run_simcim(cities,lengths):
-	fig = plot_order(cities,lengths,np.random.permutation(cities.shape[0]))
+	fig = plot_cities(cities,lengths,np.random.permutation(cities.shape[0]))
 	st.pyplot(fig)
 	B = 0.1
 	A = 1.5*B*lengths.max()
@@ -91,7 +67,7 @@ def run_simcim(cities,lengths):
 
 	s_min = s_cur[:,torch.argmin(E)]
 	order = get_order_simcim(s_min,N_cities)
-	fig = plot_order(cities,lengths,order)
+	fig = plot_cities(cities,lengths,order)
 	st.write('Best route among '+str(simcim.params_disc['attempt_num'])+' runs')
 	st.pyplot(fig)
 

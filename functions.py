@@ -8,20 +8,20 @@ def generate_cities(N_cities):
     lengths = np.sqrt(np.sum(L,2))
     return cities,lengths
 
-def plot_cities(ax,cities,order):
+def plot_cities(cities,lengths,order):
     N_cities = cities.shape[0]
+    fig, ax = plt.subplots(figsize=(8,5))
     if order.shape[0]==N_cities:
         cities_rearranged = cities[order,:]
         for i in range(N_cities-1):
             ax.plot(cities_rearranged[i:i+2,0],cities_rearranged[i:i+2,1],'-ro')
-#             x,y = (cities_rearranged[i,0],cities_rearranged[i,1])
-#             ax.annotate(str(order[i]),(x,y),xytext=(x+0.01*x,y+0.01*y),fontsize=12)
         ax.plot([cities_rearranged[N_cities-1,0],cities_rearranged[0,0]],
             [cities_rearranged[N_cities-1,1],cities_rearranged[0,1]],'-ro')
-#         x,y = (cities_rearranged[-1,0],cities_rearranged[-1,1])
-#         ax.annotate(str(order[-1]),(x,y),xytext=(x+0.01*x,y+0.01*y),fontsize=12)
         ax.set_xlabel('x',fontsize=18)
         ax.set_ylabel('y',fontsize=18)
+        ax.plot(np.zeros(5),'o',color='white',alpha=0.,label =# 'Длина маршрута '+
+             str(np.around(length(torch.tensor(order),torch.tensor(lengths)).numpy(),2)))#+'\n алгоритм без нормировки')
+        ax.legend(fontsize = 18,loc=1)
         ax.tick_params(labelsize=18)
         ax.grid()
     else:
@@ -29,6 +29,8 @@ def plot_cities(ax,cities,order):
          horizontalalignment='center',
          verticalalignment='center',
          transform = ax.transAxes)
+    fig.tight_layout()
+    return fig
 
 def energy(J,b,s):
     return -0.5*torch.einsum('in,ij,jn->n',s,J,s) - torch.einsum('in,ik->n',s,b)
@@ -93,13 +95,3 @@ def get_order_simcim(s_min,N_cities):
     inds_order = (inds_nonzero[:,1].sort()[1])
     order = inds_nonzero[:,0][inds_order]
     return order
-
-def plot_order(cities,lengths,order):
-    fig, ax = plt.subplots(figsize=(8,5))
-    plot_cities(ax,cities,order)
-    ax.plot(np.zeros(5),'o',color='white',alpha=0.,label =# 'Длина маршрута '+
-             str(np.around(length(torch.tensor(order),torch.tensor(lengths)).numpy(),2)))#+'\n алгоритм без нормировки')
-    ax.legend(fontsize = 18,loc=1)
-    ax.tick_params(labelsize=18)
-    fig.tight_layout()
-    return fig
