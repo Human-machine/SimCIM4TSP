@@ -15,12 +15,13 @@ st.write("""
  App for finding routes by simulating the electro-optical machine
 """)
 
-st.write('Here I propose to feel the taste of combinatorial optimization by probing the algorithm called SimCIM.')
+st.write('''Here I present the algorithm called SimCIM for solving Travelling Salesman Problem,
+	i. e. find the route passing through each city once and having the least distance.''')
+st.write('''For more information about SimCIM, please read the paper''')
 url = 'https://doi.org/10.1364/OE.27.010288'
 st.markdown(url, unsafe_allow_html=True)
-st.write('''Perceive this app as a black box with three hyperparameters O,S,D.
-	Your goal is to adjust these parameters in order to find a solution of TSP problem, i. e. find the route passing
-	through each city once and having the least distance.''')
+st.write('''The solution quality depends on the choice of three hyperparameters O, S, D. 
+	You need to adjust them to find best possible route.''')
 
 st.sidebar.header("User input parameters")
 
