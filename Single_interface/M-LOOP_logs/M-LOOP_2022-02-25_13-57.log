@@ -1,0 +1,4 @@
+2022-02-25 13:57:44,887 mloop                DEBUG    MLOOP Logger configured.
+2022-02-25 13:57:44,888 mloop.interfaces     DEBUG    Creating interface.
+2022-02-25 13:57:44,890 mloop.controllers    DEBUG    Controller init completed.
+2022-02-25 13:57:44,892 mloop.learners.1     ERROR    min_boundary array the wrong shape:(3,)

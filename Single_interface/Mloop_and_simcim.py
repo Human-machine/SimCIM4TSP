@@ -10,6 +10,9 @@ import matplotlib.pyplot as plt
 import torch
 from tqdm.notebook import trange
 
+datatype = torch.float32
+device = 'cuda'
+
 class Simcim(mli.Interface):
     
     params_disc = {}
@@ -20,19 +23,17 @@ class Simcim(mli.Interface):
 
     params_disc['N'] = 2000
     params_disc['attempt_num'] = 1000
-    params_cont['dt'] = 100.
+    params_cont['dt'] = 0.1
     params_cont['sigma'] = 1
     params_cont['alpha'] = 0.9
 
-    params_cont['S'] = torch.tensor(1.)
-    params_cont['D'] = torch.tensor(-0.2)
-    params_cont['O'] = torch.tensor(0.2)  
+    params_cont['S'] = torch.tensor(0.1)
+    params_cont['D'] = torch.tensor(-0.8)
+    params_cont['O'] = torch.tensor(0.1)  
         
     def __init__(self,J,b,device,datatype):
         super(Simcim,self).__init__()
 
-        self.N = self.params_disc['N']
-        self.attempt_num = self.params_disc['attempt_num']
         self.J = J.type(datatype).to(device)
         self.b = b.type(datatype).to(device)
         self.Jmax = torch.max(torch.sum(torch.abs(J),1))
@@ -65,8 +66,6 @@ class Simcim(mli.Interface):
     def init_ampl(self):
         return torch.zeros((self.dim, self.attempt_num),dtype=self.datatype).to(self.device)
     
-    def bias_sch(self):
-        return torch.linspace(0,1,self.N,dtype=self.datatype).to(self.device)
         
     
     def tanh(self,c):
@@ -85,6 +84,9 @@ class Simcim(mli.Interface):
         
         for key in params_opt.keys():
             self.params_cont[key] = params_opt[key]
+
+        self.N = self.params_disc['N']
+        self.attempt_num = self.params_disc['attempt_num']
         
         self.dt = self.params_cont['dt']
         self.zeta = self.params_cont['zeta']
@@ -115,7 +117,6 @@ class Simcim(mli.Interface):
         # define pump array
         p = self.pump()
 #         p = self.pump_lin()
-        b_ramp = self.bias_sch() 
     
         # define copupling growth
     #     zeta = coupling(init_value,final_value,dt,N)
@@ -123,7 +124,7 @@ class Simcim(mli.Interface):
         # initializing moving average of amplitudes increment
         dc_momentum = torch.zeros((self.dim, self.attempt_num),dtype=self.datatype).to(self.device)
         #free_energy_ar = torch.empty(self.N-1, dtype = self.datatype).to(device)
-        for i in trange(1,self.N):
+        for i in range(1,self.N):
         
             # calculating amplitude increment
             dc = self.ampl_inc(c_current,p[i])
@@ -169,14 +170,13 @@ class Simcim(mli.Interface):
         params = params_dict['params']
         params_opt = {}
         
-        params_opt['zeta'] = params[0] 
-        params_opt['dt'] = params[1]
-        params_opt['O'] = params[2]
-        params_opt['S'] = params[3]
-        params_opt['D'] = params[4]
+        params_opt['O'] = params[0]
+        params_opt['S'] = params[1]
+        params_opt['D'] = params[2]
+        params_opt['zeta'] = params[3]
         
         
-        cost = torch.mean(self.energy_cost(params_opt)).cpu().numpy()
+        cost = torch.min(self.energy_cost(params_opt)).cpu().numpy()
         #There is no uncertainty in our result
         uncer = 0
         #The evaluation will always be a success
@@ -189,15 +189,14 @@ class Simcim(mli.Interface):
         return cost_dict
     
 def main(controller_type,interface):
-#     interface = Simcim(J,h,device,datatype)
     
     controller = mlc.create_controller(interface,
                                        controller_type = controller_type,
-                                       max_num_runs_without_better_params = 50,
-                                       max_num_runs = 300,
-                                       num_params = 5, 
-                                       min_boundary = [0,0,0,0,-2],
-                                       max_boundary = [10,100,5,10,2])
+                                       max_num_runs_without_better_params = 30,
+                                       max_num_runs = 100,
+                                       num_params = 4, 
+                                       min_boundary = [0,0,-2,0],
+                                       max_boundary = [3,3,2,10])
     
     controller.optimize()
     
@@ -207,11 +206,10 @@ def main(controller_type,interface):
     
 #     mlv.show_all_default_visualizations(controller)
     params = controller.best_params
-    params_opt = {}
-    params_opt['zeta'] = params[0]
-    params_opt['dt'] = params[1] 
-    params_opt['O'] = params[2]
-    params_opt['S'] = params[3]
-    params_opt['D'] = params[4]
+    params_opt = {} 
+    params_opt['O'] = params[0]
+    params_opt['S'] = params[1]
+    params_opt['D'] = params[2]
+    params_opt['zeta'] = params[3]
     return params_opt
     

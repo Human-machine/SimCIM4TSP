@@ -1,0 +1,27 @@
+2022-02-25 13:44:37,530 mloop                DEBUG    MLOOP Logger configured.
+2022-02-25 13:44:37,530 mloop.interfaces     DEBUG    Creating interface.
+2022-02-25 13:51:58,018 mloop.interfaces     DEBUG    Creating interface.
+2022-02-25 13:52:05,711 mloop.interfaces     DEBUG    Creating interface.
+2022-02-25 13:52:37,429 mloop.interfaces     DEBUG    Creating interface.
+2022-02-25 13:53:22,464 mloop.interfaces     DEBUG    Creating interface.
+2022-02-25 13:55:45,499 mloop.interfaces     DEBUG    Creating interface.
+2022-02-25 13:55:45,503 mloop.controllers    DEBUG    Controller init completed.
+2022-02-25 13:55:45,543 mloop.learners.1     DEBUG    Learner init completed.
+2022-02-25 13:55:45,545 mloop.learners.2     DEBUG    Learner init completed.
+2022-02-25 13:55:45,545 mloop.controllers    INFO     Optimization started.
+2022-02-25 13:55:45,548 mloop.interfaces     DEBUG    Entering main loop of interface.
+2022-02-25 13:55:45,550 mloop.controllers    DEBUG    ML learner started.
+2022-02-25 13:55:45,666 mloop.controllers    DEBUG    Starting training optimization.
+2022-02-25 13:55:45,667 mloop.controllers    INFO     Run:1 (training)
+2022-02-25 13:55:45,670 mloop.controllers    INFO     params [ 6.06990557 41.52974665  3.98859256  0.60702396  1.02073634]
+2022-02-25 13:55:50,710 mloop.controllers    WARNING  !!! Do not give the interrupt signal again !!! 
+ M-LOOP stopped with keyboard interupt or system exit. Please wait at least 1 minute for the threads to safely shut down. 
+ 
+2022-02-25 13:55:50,711 mloop.controllers    WARNING  Closing down controller.
+2022-02-25 13:55:50,711 mloop.controllers    DEBUG    ML learner end set.
+2022-02-25 13:55:53,758 mloop.controllers    DEBUG    ML learner joined
+2022-02-25 13:55:53,759 mloop.controllers    INFO     Machine learning learner did not provide best and/or all minima.
+2022-02-25 13:55:53,760 mloop.controllers    DEBUG    Learner end event set.
+2022-02-25 13:55:53,761 mloop.controllers    DEBUG    Interface end event set.
+2022-02-25 13:55:54,611 mloop.learners.1     DEBUG    Learner end signal received. Ending
+2022-02-25 13:55:54,613 mloop.controllers    DEBUG    Learner joined.
