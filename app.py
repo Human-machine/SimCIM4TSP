@@ -15,9 +15,11 @@ st.write("""
  The app for finding TSP solutions by simulating the Coherent Ising Machine (CIM)
 """)
 
-st.write("More details about CIM")
+# st.write("More details about CIM")
 url = "https://www.science.org/doi/10.1126/science.aah4243"
-st.markdown(url, unsafe_allow_html=True)
+# st.markdown(url, unsafe_allow_html=True)
+st.write("check out this [link](%s)" % url)
+st.markdown("check out this [link](%s)" % url)
 
 
 st.write('''Here I present the algorithm called SimCIM for solving Travelling Salesman Problem,
