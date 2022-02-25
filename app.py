@@ -9,16 +9,13 @@ from functions import*
 datatype = torch.float32
 device = 'cpu'
 
-
+url = "https://www.science.org/doi/10.1126/science.aah4243"
 st.write("""
 # SimCIM for TSP
- The app for finding TSP solutions by simulating the Coherent Ising Machine (CIM)
-""")
+ The app for finding TSP solutions by simulating the [Coherent Ising Machine](%s) (CIM)
+""" % url)
 
-# st.write("More details about CIM")
-url = "https://www.science.org/doi/10.1126/science.aah4243"
-# st.markdown(url, unsafe_allow_html=True)
-st.write("check out this [link](%s)" % url)
+# st.write("check out this [link](%s)" % url)
 # st.markdown("check out this [link](%s)" % url)
 
 
