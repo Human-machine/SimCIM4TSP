@@ -19,7 +19,7 @@ st.write("""
 url = "https://www.science.org/doi/10.1126/science.aah4243"
 # st.markdown(url, unsafe_allow_html=True)
 st.write("check out this [link](%s)" % url)
-st.markdown("check out this [link](%s)" % url)
+# st.markdown("check out this [link](%s)" % url)
 
 
 st.write('''Here I present the algorithm called SimCIM for solving Travelling Salesman Problem,
