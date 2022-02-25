@@ -9,10 +9,26 @@ from functions import*
 datatype = torch.float32
 device = 'cpu'
 
+
 st.write("""
 # SimCIM for TSP
- App for finding routes by simulating the electro-optical machine
+ The app for finding TSP solutions by simulating the Coherent Ising Machine (CIM)
 """)
+
+st.write("More details about CIM")
+url = "https://www.science.org/doi/10.1126/science.aah4243"
+st.markdown(url, unsafe_allow_html=True)
+
+
+st.write('''Here I present the algorithm called SimCIM for solving Travelling Salesman Problem,
+	i. e. finding the route passing through each city once with the least distance.''')
+st.write('''For more information about SimCIM, please read the paper''')
+
+url = 'https://doi.org/10.1364/OE.27.010288'
+st.markdown(url, unsafe_allow_html=True)
+
+st.write('''The solution quality depends on the choice of three hyperparameters O, S, D. 
+	You need to adjust them to find best possible route.''')
 
 st.sidebar.header("User input parameters")
 
@@ -33,7 +49,7 @@ st.subheader("User input parameters")
 st.write(df)
 
 def run_simcim(cities,lengths):
-	fig = plot_order(cities,lengths,np.random.permutation(cities.shape[0]))
+	fig = plot_cities(cities,lengths,np.random.permutation(cities.shape[0]))
 	st.pyplot(fig)
 	B = 0.1
 	A = 1.5*B*lengths.max()
@@ -59,7 +75,7 @@ def run_simcim(cities,lengths):
 
 	s_min = s_cur[:,torch.argmin(E)]
 	order = get_order_simcim(s_min,N_cities)
-	fig = plot_order(cities,lengths,order)
+	fig = plot_cities(cities,lengths,order)
 	st.write('Best route among '+str(simcim.params_disc['attempt_num'])+' runs')
 	st.pyplot(fig)
 
