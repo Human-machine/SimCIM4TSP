@@ -5,10 +5,8 @@ import mloop.visualizations as mlv
 
 #Other imports
 import numpy as np
-import time
 import matplotlib.pyplot as plt
 import torch
-from tqdm.notebook import trange
 
 datatype = torch.float32
 device = 'cuda'
@@ -22,14 +20,14 @@ class Simcim(mli.Interface):
     params_cont['zeta'] = 1.
 
     params_disc['N'] = 2000
-    params_disc['attempt_num'] = 1000
-    params_cont['dt'] = 0.1
-    params_cont['sigma'] = 1
+    params_disc['attempt_num'] = 200
+    params_cont['dt'] = .1
+    params_cont['sigma'] = .01
     params_cont['alpha'] = 0.9
 
     params_cont['S'] = torch.tensor(0.1)
     params_cont['D'] = torch.tensor(-0.8)
-    params_cont['O'] = torch.tensor(0.1)  
+    params_cont['O'] = torch.tensor(0.05)    
         
     def __init__(self,J,b,device,datatype):
         super(Simcim,self).__init__()
@@ -66,8 +64,6 @@ class Simcim(mli.Interface):
     def init_ampl(self):
         return torch.zeros((self.dim, self.attempt_num),dtype=self.datatype).to(self.device)
     
-        
-    
     def tanh(self,c):
         return self.c_th*torch.tanh(c)
     
@@ -87,7 +83,6 @@ class Simcim(mli.Interface):
 
         self.N = self.params_disc['N']
         self.attempt_num = self.params_disc['attempt_num']
-        
         self.dt = self.params_cont['dt']
         self.zeta = self.params_cont['zeta']
         self.c_th = self.params_cont['c_th']
@@ -111,7 +106,7 @@ class Simcim(mli.Interface):
     #     c_full[0] = c_current
     
         # creating the array for evolving amplitudes from random attempt
-        c_evol = torch.empty((self.dim, self.N),dtype=datatype).to(device)
+        c_evol = torch.empty((self.dim, self.N),dtype=self.datatype).to(self.device)
         c_evol[:,0] = c_current[:,random_attempt]
     
         # define pump array
@@ -154,7 +149,7 @@ class Simcim(mli.Interface):
             #s = torch.sign(c_current)
             #free_energy_ar[i-1] = self.free_energy(s,self.beta)
         
-        return c_current, c_evol#, free_energy_ar
+        return c_current, c_evol
     
     def energy_cost(self,params_opt):
         c_current, c_evol = self.evolve(params_opt)
